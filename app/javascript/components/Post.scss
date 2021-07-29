@@ -1,0 +1,13 @@
+.post {
+}
+
+.post__actions {
+  color: #aaa;
+}
+
+.post__action {
+
+  & + & {
+    margin-left: 1rem;
+  }
+}

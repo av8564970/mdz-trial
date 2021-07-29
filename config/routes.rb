@@ -7,4 +7,8 @@ Rails.application.routes.draw do
     resources :posts, only: SIMPLE_REST_ACTIONS
     resources :components, only: SIMPLE_REST_ACTIONS
   end
+
+  get '/posts', to: 'posts#index'
+  get '/posts/create', to: 'posts#create'
+  get '/posts/:id', to: 'posts#edit'
 end

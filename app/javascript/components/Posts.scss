@@ -1,0 +1,27 @@
+.layout {
+  height: 100%;
+}
+
+.layout__content {
+  padding: 3rem 2rem 4rem;
+}
+
+.layout__title {
+  font-size: 3rem;
+}
+
+.post-list {
+  display: grid;
+  grid-gap: 2rem;
+  margin-top: 1rem;
+}
+
+.post-list__item {
+}
+
+.post-list__empty-placeholder {
+}
+
+.post-list-actions {
+  margin-top: 2.5rem;
+}
