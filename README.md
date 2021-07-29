@@ -1,24 +1,20 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Setup
 
-Things you may want to cover:
+```
+$ ruby --version
+ruby 2.5.5p157 (2019-03-15 revision 67260) [x86_64-linux-gnu]
 
-* Ruby version
+$ sqlite3 --version
+3.27.2 2019-02-25 16:06:06 bd49a8271d650fa89e446b42e513b595a717b9212c91dd384aab871fc1d0alt1
 
-* System dependencies
+$ node --version
+v14.16.1
 
-* Configuration
+$ yarn --version
+1.22.11
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+$ rails --version
+Rails 6.1.4
+```
