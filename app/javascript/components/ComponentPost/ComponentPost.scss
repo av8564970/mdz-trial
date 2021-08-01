@@ -1,6 +1,6 @@
 @import "../../../assets/stylesheets/helpers";
 
-.post-edit-page {
+.component-post {
 
   &__loading {
     @extend %loading;
@@ -10,12 +10,6 @@
     @extend %error;
   }
 
-  &__form {
-    margin-top: 1rem;
-    background-color: #fff;
-  }
-
-  &__actions {
-    margin-top: 2.5rem;
+  &__post {
   }
 }

@@ -1,16 +1,19 @@
 import React, { FC, useCallback } from 'react';
-import clsx from 'clsx';
 import { Link } from 'react-router-dom';
+import clsx from 'clsx';
 import { Card } from 'antd';
 
-import { IPost } from '../../types/entities';
+import usePostComponents from '../../hooks/usePostComponents';
+import { PostDto } from '../../types/entities';
+import Component from '../Component/Component';
 
 import './Post.scss';
 
 
 interface PostProps {
-  post: IPost;
-  onDelete: (post: IPost) => Promise<void>;
+  post: PostDto;
+  onDelete: (id: number) => Promise<void>;
+  chain: number[];
   className?: string;
 }
 
@@ -18,12 +21,19 @@ const Post: FC<PostProps> = (props) => {
   const {
     post,
     onDelete,
+    chain,
     className,
   } = props;
 
 
+  const {
+    components,
+    error,
+  } = usePostComponents(post.id);
+
+
   const handleDeleteButtonClick = useCallback(async () => {
-    await onDelete(post);
+    await onDelete(post.id);
   }, [ post ]);
 
 
@@ -42,7 +52,26 @@ const Post: FC<PostProps> = (props) => {
       className={clsx('post', className)}
       extra={actionsJsx}
     >
-      TBD
+      {error ?
+        (
+          <div className="post__error">{error}</div>
+        ) :
+        components ?
+          (
+            <div className="post__components">
+              {components.map((component) => (
+                <Component
+                  key={component.id}
+                  component={component}
+                  postChain={chain}
+                  className="post__component"
+                />
+              ))}
+            </div>
+          ) :
+          (
+            <div className="post__loading">Loading...</div>
+          )}
     </Card>
   );
 };

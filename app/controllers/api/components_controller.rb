@@ -5,7 +5,13 @@ class Api::ComponentsController < ApplicationController
   before_action :find_component, only: %w(show update destroy)
 
   def index
-    render json: Component.all.map { |component| to_dto(component) }
+    search_params = params.permit(:post_id)
+    if params[:post_id]
+      components = Component.where(:post_id => search_params[:post_id]).order(:ord)
+    else
+      components = Component.all
+    end
+    render json: { result: components.map { |component| to_dto(component) } }
   end
 
   def create
@@ -13,21 +19,21 @@ class Api::ComponentsController < ApplicationController
     # TODO(alx-v): Validate :payload
     component = Component.create(component_params)
     if component.persisted?
-      render json: component, status: :created
+      render json: { result: component }, status: :created
     else
       render json: { error: compile_error(component.errors) }, status: :bad_request
     end
   end
 
   def show
-    render json: to_dto(@component)
+    render json: { result: to_dto(@component) }
   end
 
   def update
     component_params = params[:component].permit(:component_type, :payload, :ord)
     @component.attributes = component_params
     if @component.save
-      render json: @component
+      render json: { result: to_dto(@component) }
     else
       render json: { error: compile_error(@component.errors) }, status: :bad_request
     end
@@ -53,7 +59,7 @@ class Api::ComponentsController < ApplicationController
   def to_dto(component)
     dto = component.attributes
     begin
-      dto['payload'] = JSON.parse!(dto['payload'])
+      dto['payload'] = JSON.parse(dto['payload'])
     rescue JSON::ParserError
       # Ignored
     end
@@ -61,6 +67,6 @@ class Api::ComponentsController < ApplicationController
   end
 
   def compile_error(errors)
-    errors.map { |err| "#{err.attribute}: #{err.message}" }.join("\n")
+    errors.map { |e| "#{e.attribute}: #{e.message}" }.join("\n")
   end
 end

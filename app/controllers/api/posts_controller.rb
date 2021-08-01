@@ -3,20 +3,20 @@ class Api::PostsController < ApplicationController
   before_action :find_post, only: %w(show update destroy)
 
   def index
-    render json: Post.all
+    render json: { result: Post.all }
   end
 
   def create
     post = Post.create
     if post.persisted?
-      render json: post, status: :created
+      render json: { result: post }, status: :created
     else
       render json: { error: compile_error(post.errors) }, status: :bad_request
     end
   end
 
   def show
-    render json: @post
+    render json: { result: @post }
   end
 
   def update

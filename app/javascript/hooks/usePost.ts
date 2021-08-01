@@ -8,29 +8,45 @@ import {
 
 import Api from '../api/Api';
 import ServerSidePropsContext from '../contexts/server-side-props';
-import { IPost } from '../types/entities';
+import { PostDto } from '../types/entities';
 
 
-type Value = [
-  IPost,
-  Dispatch<SetStateAction<IPost>>,
-];
+interface Value {
+  post: PostDto;
+  setPost: Dispatch<SetStateAction<PostDto>>;
+  error: string | null;
+}
 
 export default function usePost(id: number): Value {
   const { post: serverSidePost } = useContext(ServerSidePropsContext);
 
   const [ post, setPost ] = useState(serverSidePost);
 
+  const [ error, setError ] = useState<string | null>(null);
+
   useEffect(() => {
     if (post) {
       return;
     }
 
-    Api.getPost(id).then((newPost) => {
-      setPost(newPost);
+    Api.getPost(id).then((response) => {
+      const {
+        result: newPost,
+        error: newError,
+      } = response;
+
+      if (newError) {
+        setError(newError);
+      } else {
+        setPost(newPost);
+      }
     });
   }, [ id ]);
 
 
-  return [ post, setPost ];
+  return {
+    post,
+    setPost,
+    error,
+  };
 }

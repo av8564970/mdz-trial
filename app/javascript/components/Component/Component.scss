@@ -1,0 +1,37 @@
+@import "../../../assets/stylesheets/helpers";
+
+.component {
+
+  &__loading {
+    @extend %loading;
+  }
+
+  &_type_string {
+  }
+
+  &_type_boolean {
+    font-style: italic;
+  }
+
+  &_type_relation {
+  }
+
+  &__relation-label {
+    font-weight: 700;
+  }
+
+  &__relation-value {
+    margin-left: 2rem;
+  }
+
+  &__post {
+    margin-top: 1rem;
+    border: 1px solid;
+  }
+
+  &__error {
+    @extend %error;
+
+    margin-top: 1rem;
+  }
+}

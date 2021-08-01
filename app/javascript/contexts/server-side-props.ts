@@ -1,14 +1,14 @@
 import { createContext } from 'react';
 
-import { IPost } from '../types/entities';
+import { PostDto } from '../types/entities';
 
 
 export type ServerSideProps = Partial<{
   // region posts#index
-  posts: IPost[];
+  posts: PostDto[];
   // endregion
   // region posts#edit
-  post: IPost;
+  post: PostDto;
   // endregion
 }>;
 

@@ -1,4 +1,14 @@
+@import "../../../assets/stylesheets/helpers";
+
 .post-list-page {
+
+  &__loading {
+    @extend %loading;
+  }
+
+  &__error {
+    @extend %error;
+  }
 }
 
 .post-list {

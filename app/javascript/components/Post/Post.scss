@@ -1,4 +1,14 @@
+@import "../../../assets/stylesheets/helpers";
+
 .post {
+
+  &__loading {
+    @extend %loading;
+  }
+
+  &__error {
+    @extend %error;
+  }
 }
 
 .post__actions {
@@ -10,4 +20,12 @@
   & + & {
     margin-left: 1rem;
   }
+}
+
+.post__components {
+  display: grid;
+  grid-gap: 1rem;
+}
+
+.post__component {
 }
