@@ -25,6 +25,10 @@ export default function usePostComponents(postId: number): Value {
       return;
     }
 
+    if (!postId) {
+      return;
+    }
+
     Api.getComponents(postId).then((response) => {
       const {
         result: newComponents,

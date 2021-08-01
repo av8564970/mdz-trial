@@ -1,10 +1,12 @@
 import React, { FC } from 'react';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-import { Form } from 'antd';
 
+import Api from '../../api/Api';
 import usePost from '../../hooks/usePost';
+import usePostComponents from '../../hooks/usePostComponents';
 import PageLayout from '../PageLayout/PageLayout';
+import PostForm, { PostFormValues } from '../PostForm/PostForm';
 
 import './PostEditPage.scss';
 
@@ -21,6 +23,44 @@ const PostEditPage: FC = () => {
     error,
   } = usePost(Number(id));
 
+  const {
+    components,
+    error: postComponentsError,
+  } = usePostComponents(post?.id);
+
+
+  async function handleFormSubmit(values: PostFormValues): Promise<void> {
+    const { components: newComponents } = values;
+    const newComponentIds = newComponents.map((component) => component.id);
+    const promises: Promise<unknown>[] = [];
+    // delete
+    components.forEach((component) => {
+      const { id: componentId } = component;
+      if (!newComponentIds.includes(componentId)) {
+        promises.push(Api.deleteComponent(componentId));
+      }
+    });
+    // create and update
+    newComponents.forEach((component) => {
+      const { id: componentId } = component;
+      if (!componentId) {
+        promises.push(Api.createComponent(post!.id, component));
+      } else {
+        promises.push(
+          Api.updateComponent(
+            componentId,
+            {
+              ...component,
+              post_id: post!.id,
+            },
+          ),
+        );
+      }
+    });
+    //
+    await Promise.all(promises);
+  }
+
 
   return (
     <PageLayout title={`Post #${id}`} className="post-edit-page">
@@ -31,9 +71,21 @@ const PostEditPage: FC = () => {
         post ?
           (
             <>
-              <Form className="post-edit-page__form">
-                TBD
-              </Form>
+              {postComponentsError ?
+                (
+                  <div className="post-edit-page__post-components-error">{postComponentsError}</div>
+                ) :
+                components ?
+                  (
+                    <PostForm
+                      components={components}
+                      onSubmit={handleFormSubmit}
+                      className="post-edit-page__form"
+                    />
+                  ) :
+                  (
+                    <div className="post-edit-page__post-components-loading">Loading...</div>
+                  )}
               <div className="post-edit-page__actions">
                 <Link to="/posts">← Back to Posts</Link>
               </div>

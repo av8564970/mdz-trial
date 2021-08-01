@@ -10,9 +10,18 @@
     @extend %error;
   }
 
+  &__post-components-loading {
+    @extend %loading;
+  }
+
+  &__post-components-error {
+    @extend %error;
+  }
+
   &__form {
-    margin-top: 1rem;
+    margin-top: 2rem !important;
     background-color: #fff;
+    padding: 3rem 2rem 2rem !important;
   }
 
   &__actions {

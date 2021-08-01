@@ -1,0 +1,50 @@
+@import "../../../assets/stylesheets/helpers";
+
+.post-form {
+  display: grid;
+  grid-gap: 2rem;
+
+  &__space {
+    gap: 2rem !important;
+  }
+
+  &__i {
+    color: #555;
+  }
+
+  &__item {
+    margin-bottom: 0 !important;
+  }
+
+  &__heading {
+    font-size: 2rem !important;
+  }
+
+  &__type {
+    width: 16rem;
+  }
+
+  &__payload {
+    width: 32rem;
+  }
+
+  &__ord {
+    width: 16rem;
+  }
+
+  &__actions {
+    margin-top: 1rem !important;
+    margin-bottom: 0 !important;
+
+    .ant-form-item-control-input-content {
+      display: flex;
+      align-items: baseline;
+    }
+  }
+
+  &__error {
+    @extend %error;
+
+    margin-left: 2rem;
+  }
+}

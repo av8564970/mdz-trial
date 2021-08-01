@@ -15,7 +15,7 @@ class Api::ComponentsController < ApplicationController
   end
 
   def create
-    component_params = params[:component].permit(:component_type, :payload, :ord)
+    component_params = params[:component].permit(:post_id, :component_type, :payload, :ord)
     # TODO(alx-v): Validate :payload
     component = Component.create(component_params)
     if component.persisted?

@@ -1,20 +1,32 @@
+interface Id {
+  id: number;
+}
+
 interface Timestamps {
   created_at: string;
   updated_at: string;
 }
 
-export interface PostDto extends Timestamps {
-  id: number;
+interface Dto extends Id, Timestamps {}
+
+export interface PostDto extends Dto {
 }
 
-export interface ComponentDto<T = unknown> extends Timestamps {
-  id: number;
+export enum ComponentType {
+  'string' = 'string',
+  'boolean' = 'boolean',
+  'relation' = 'relation',
+}
+
+export interface ComponentPayload<T = unknown> {
+  label: string;
+  value: T;
+}
+
+export interface ComponentDto<T = unknown> extends Dto {
   post_id: number | null;
-  component_type: 'string' | 'boolean' | 'relation';
-  payload: {
-    label: string;
-    value: T;
-  };
+  component_type: ComponentType;
+  payload: ComponentPayload<T>;
   ord: number;
 }
 
