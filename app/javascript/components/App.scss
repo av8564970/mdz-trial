@@ -1,0 +1,33 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+}
+
+html {
+  min-height: 100%;
+  font: 10px/1.5 sans-serif;
+}
+
+body {
+  height: 100%;
+  font-size: 1.5rem;
+}
+
+[data-react-class] {
+  height: 100%;
+}
+
+
+.link {
+  background-color: transparent;
+  font-size: inherit;
+  color: #1890ff;
+  cursor: pointer;
+
+  &:hover {
+    color: #40a9ff;
+  }
+}

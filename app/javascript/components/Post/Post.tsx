@@ -1,8 +1,9 @@
 import React, { FC, useCallback } from 'react';
 import clsx from 'clsx';
+import { Link } from 'react-router-dom';
 import { Card } from 'antd';
 
-import { IPost } from '../types/entities';
+import { IPost } from '../../types/entities';
 
 import './Post.scss';
 
@@ -28,7 +29,7 @@ const Post: FC<PostProps> = (props) => {
 
   const actionsJsx = (
     <div className="post__actions">
-      <a href={`/posts/${post.id}`} className="post__action">Edit</a>
+      <Link to={`/posts/${post.id}`} className="post__action">Edit</Link>
       <button onClick={handleDeleteButtonClick} className="link post__action">
         Delete
       </button>

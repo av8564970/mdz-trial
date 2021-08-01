@@ -1,0 +1,14 @@
+.page {
+  min-height: 100% !important;
+
+  &__header {
+  }
+
+  &__title {
+    font-size: 3rem;
+  }
+
+  &__content {
+    padding: 3rem 2rem 4rem;
+  }
+}

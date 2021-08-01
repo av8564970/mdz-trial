@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.all
+    posts = Post.all
+    @spa_props = { posts: posts }
+    render 'spa'
   end
 
   def create
@@ -9,6 +11,8 @@ class PostsController < ApplicationController
   end
 
   def edit
-    render plain: 'Not implemented yet.', :status => :not_implemented
+    post = Post.where({ id: params[:id] }).first
+    @spa_props = { post: post }
+    render 'spa'
   end
 end

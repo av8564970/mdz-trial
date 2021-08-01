@@ -1,13 +1,4 @@
-.layout {
-  height: 100%;
-}
-
-.layout__content {
-  padding: 3rem 2rem 4rem;
-}
-
-.layout__title {
-  font-size: 3rem;
+.post-list-page {
 }
 
 .post-list {
@@ -22,6 +13,6 @@
 .post-list__empty-placeholder {
 }
 
-.post-list-actions {
+.post-list-page__actions {
   margin-top: 2.5rem;
 }
