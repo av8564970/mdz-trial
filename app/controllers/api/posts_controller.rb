@@ -7,7 +7,8 @@ class Api::PostsController < ApplicationController
   end
 
   def create
-    post = Post.create
+    post_params = params[:post].permit(:is_dependent)
+    post = Post.create(post_params)
     if post.persisted?
       render json: { result: post }, status: :created
     else

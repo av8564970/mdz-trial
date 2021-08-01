@@ -49,7 +49,12 @@ const Post: FC<PostProps> = (props) => {
   return (
     <Card
       title={`Post #${post.id}`}
-      className={clsx('post', className)}
+      className={clsx(
+        'post', {
+          'post_dependent': post.is_dependent && 1 === chain.length,
+        },
+        className,
+      )}
       extra={actionsJsx}
     >
       {error ?

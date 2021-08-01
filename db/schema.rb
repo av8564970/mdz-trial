@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_27_193316) do
+ActiveRecord::Schema.define(version: 2021_08_01_192712) do
 
   create_table "components", force: :cascade do |t|
     t.integer "post_id"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2021_07_27_193316) do
   end
 
   create_table "posts", force: :cascade do |t|
+    t.boolean "is_dependent", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

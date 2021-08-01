@@ -11,7 +11,7 @@ class PostsController < ApplicationController
     # comments
     comments = []
     rand(1..3).times do
-      comment = Post.create
+      comment = Post.create(is_dependent: true)
       Component.create(
         post: comment,
         component_type: 'string',

@@ -10,6 +10,7 @@ interface Timestamps {
 interface Dto extends Id, Timestamps {}
 
 export interface PostDto extends Dto {
+  is_dependent: boolean;
 }
 
 export enum ComponentType {

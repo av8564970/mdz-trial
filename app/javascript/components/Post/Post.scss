@@ -2,6 +2,10 @@
 
 .post {
 
+  &_dependent {
+    border: 1px dashed !important;
+  }
+
   &__loading {
     @extend %loading;
   }
