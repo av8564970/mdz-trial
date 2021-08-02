@@ -25,6 +25,7 @@ class PostsController < ApplicationController
         ord: 2
       )
       comments << comment
+      PostsChannel.broadcast_to(:activity, { type: 'created', payload: comment })
     end
     # post
     post = Post.create
@@ -54,6 +55,7 @@ class PostsController < ApplicationController
     )
     #
     flash[:alert] = "Post has been created (ID=#{post.id})"
+    PostsChannel.broadcast_to(:activity, { type: 'created', payload: post })
     redirect_to posts_path
   end
 

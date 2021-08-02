@@ -21,7 +21,8 @@ const PostEditPage: FC = () => {
   const {
     post,
     error,
-  } = usePost(Number(id));
+    subscription,
+  } = usePost(Number(id), true);
 
   const {
     components,
@@ -59,6 +60,7 @@ const PostEditPage: FC = () => {
     });
     //
     await Promise.all(promises);
+    subscription.perform('update', { id: post!.id });
   }
 
 

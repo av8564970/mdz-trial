@@ -10,6 +10,7 @@ class Api::PostsController < ApplicationController
     post_params = params[:post].permit(:is_dependent)
     post = Post.create(post_params)
     if post.persisted?
+      PostsChannel.broadcast_to(:activity, { type: 'created', payload: post })
       render json: { result: post }, status: :created
     else
       render json: { error: compile_error(post.errors) }, status: :bad_request
@@ -26,6 +27,7 @@ class Api::PostsController < ApplicationController
 
   def destroy
     if @post.destroy
+      PostsChannel.broadcast_to(:activity, { type: 'deleted', payload: @post })
       render json: {}
     else
       render json: { error: compile_error(@post.errors) }, status: :bad_request

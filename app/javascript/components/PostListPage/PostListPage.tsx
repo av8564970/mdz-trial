@@ -22,7 +22,7 @@ const PostListPage: FC = () => {
 
   async function handlePostDelete(id: number): Promise<void> {
     await Api.deletePost(id);
-    setPosts((currentPosts) => currentPosts.filter((post) => post.id !== id));
+    setPosts((currentPosts) => currentPosts?.filter((post) => post.id !== id));
   }
 
 
@@ -42,7 +42,7 @@ const PostListPage: FC = () => {
                 {posts.length ?
                   posts.map((post) => (
                     <Post
-                      key={post.id}
+                      key={post.key ?? post.id}
                       post={post}
                       onDelete={handlePostDelete}
                       chain={[ post.id ]}
