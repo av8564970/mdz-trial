@@ -1,6 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
+import { Alert } from 'antd';
 
 import Api from '../../api/Api';
+import ServerSidePropsContext from '../../contexts/server-side-props';
 import usePosts from '../../hooks/usePosts';
 import PageLayout from '../PageLayout/PageLayout';
 import Post from '../Post/Post';
@@ -15,6 +17,8 @@ const PostListPage: FC = () => {
     error,
   } = usePosts();
 
+  const { alert } = useContext(ServerSidePropsContext);
+
 
   async function handlePostDelete(id: number): Promise<void> {
     await Api.deletePost(id);
@@ -24,6 +28,9 @@ const PostListPage: FC = () => {
 
   return (
     <PageLayout title="Posts" className="post-list-page">
+      {alert && (
+        <Alert message={alert} type="success" banner closable className="post-list-page__banner" />
+      )}
       {error ?
         (
           <div className="post-list-page__error">{error}</div>

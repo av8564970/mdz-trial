@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 
   def index
     posts = Post.all
-    @spa_props = { posts: posts }
+    @spa_props = { posts: posts, alert: flash[:alert] }
     render 'spa'
   end
 
@@ -53,6 +53,7 @@ class PostsController < ApplicationController
       ord: 4
     )
     #
+    flash[:alert] = "Post has been created (ID=#{post.id})"
     redirect_to posts_path
   end
 

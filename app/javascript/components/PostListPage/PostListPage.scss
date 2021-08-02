@@ -2,6 +2,10 @@
 
 .post-list-page {
 
+  &__banner {
+    margin-bottom: 2rem !important;
+  }
+
   &__loading {
     @extend %loading;
   }
